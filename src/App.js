@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+// Modules
+import { useState } from 'react';
+// Styling
 import './App.css';
+// Components
+import Header from './components/Header';
+import AddMoney from './components/AddMoney';
+import ListOfMoney from './components/ListOfMoney.js';
 
 function App() {
+
+  const [expenseList] = useState([]);
+
+
+  const addExpense = (e, expense) => {
+    e.preventDefault();
+    console.log(expense);
+    expenseList.push(expense);
+    console.log(expenseList);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <AddMoney addExpense={addExpense} />
+      <form action="" ><button type='submit'>Log app.js</button></form>
+      <ListOfMoney expenseList={expenseList}/> 
     </div>
   );
 }
