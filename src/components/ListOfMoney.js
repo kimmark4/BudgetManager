@@ -8,7 +8,7 @@ const ListOfMoney = ({expenseList}) => {
     return (
         <div>
             <ul className="expenseList">
-                {list == []
+                {list
                     ?
                     list.map((expense) => {
                         return (

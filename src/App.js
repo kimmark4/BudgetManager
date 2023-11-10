@@ -1,31 +1,54 @@
 // Modules
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // Styling
 import './App.css';
 // Components
-import Header from './components/Header';
-import AddMoney from './components/AddMoney';
-import ListOfMoney from './components/ListOfMoney.js';
+// import Header from './components/Header';
+// import AddMoney from './components/AddMoney';
+// import ListOfMoney from './components/ListOfMoney.js';
 
 function App() {
 
-  const [expenseList] = useState([]);
+  const [expenseList, setExpenseList] = useState([]);
+  const [expense, setExpense] = useState();
 
+  const handleUserChoice = (e) => {
+    // console.log(e.target.value);
+    setExpense(e.target.value)
+  }
 
-  const addExpense = (e, expense) => {
+  const addToExpenseList = (e) =>{
     e.preventDefault();
-    console.log(expense);
-    expenseList.push(expense);
+    expenseList.push(parseInt(expense))
     console.log(expenseList);
   }
 
 
+
   return (
     <div className="App">
-      <Header />
-      <AddMoney addExpense={addExpense} />
-      <form action="" ><button type='submit'>Log app.js</button></form>
-      <ListOfMoney expenseList={expenseList}/> 
+      <header>Budget Tracker</header>
+      <form action="" className="addExpenseForm" onSubmit={addToExpenseList}>
+        <h2>Add Expense</h2>
+        <input
+          type="text"
+          onChange={handleUserChoice} />
+        <button type="submit" className="addButton">Add</button>
+      </form>
+      <form action="" className="addIncomeForm">
+        <h2>Add Income</h2>
+        <input type="text" name="" id="" />
+        <button type="submit" className="addButton">Add</button>
+      </form>
+      <ul>
+        {
+          expenseList.map((expense) => {
+            return (
+              <li key={expense}>{expense}</li>
+            )
+          })
+        }
+      </ul>
     </div>
   );
 }
